@@ -1,0 +1,41 @@
+<!-- your code here -->
+<h1 id="title" class="heading">Online Car Rental Service</h1>
+<div class="container">
+  <div class="card" *ngFor="let car of cars" (click)="selectedCar = api.getCar(car.id)">
+    <img src="../assets/car.svg" />
+    <h1 class="car-title">{{car.name}}</h1>
+    <h2></h2>
+    <p>{{car.price}} Lakh (Estimated price)</p>
+    <p class="rental-price">{{ car.rental_price }} INR/Month</p>
+    <p class="vehicle-type">{{car.type}}</p>
+  </div>
+</div>
+<div class="request-form" *ngIf="selectedCar">
+  <div class="content">
+    <h1>Booknow</h1>
+    <hr/>
+    <label>Model</label>
+    <h2 class="model-name">{{selectedCar[0].name}}</h2>
+    <label>Duration</label>
+    <ul>
+      <li><label><input type="radio" name="duration" id="month_1" [value]="1" [(ngModel)]="duration" /> 1 Month</label></li>
+      <li><label><input type="radio" name="duration" id="month_3" [value]="3" [(ngModel)]="duration" /> 3 Month</label></li>
+      <li><label><input type="radio" name="duration" id="month_6" [value]="6" [(ngModel)]="duration" /> 6 Month</label></li>
+      <li><label><input type="radio" name="duration" id="month_12" [value]="12" [(ngModel)]="duration" /> 1 Year</label></li>
+    </ul>
+    <p>Rental Price: {{selectedCar[0].rental_price}} /Month</p>
+    <p class="amount-payable">Payable Amount : ₹ {{selectedCar[0].rental_price * duration}}</p>
+    <hr />
+    <h2>Your Details</h2>
+    <label>Full Name</label>
+    <input type="text" id="name" [(ngModel)]="name" />
+    <label>Email</label>
+    <input type="email" id="email" [(ngModel)]="email" />
+    <label>Mobile No.</label>
+    <input type="text" id="mobile" [(ngModel)]="mobile" />
+    <div class="frm-action-btn">
+      <button id="submit-btn" (click)="submit()">Submit</button>
+      <button (click)="selectedCar=null">Close</button>
+    </div>
+  </div>
+</div>
